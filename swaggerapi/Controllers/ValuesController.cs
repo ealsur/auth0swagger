@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.SwaggerGen.Annotations;
 
@@ -26,6 +27,7 @@ public class ValuesController : Controller
         return new ObjectResult(_repository.Get(id));
     } 
 
+    [Authorize]
     [HttpPost]
     [Produces(typeof(MyModel))]
     [SwaggerResponse(System.Net.HttpStatusCode.OK, Type = typeof(MyModel))]
@@ -39,6 +41,7 @@ public class ValuesController : Controller
         return CreatedAtRoute("GetModel", new { id = item.Id }, item);
     }
 
+    [Authorize]
     [HttpPut("{id}")]    
     public IActionResult Update(string id, [FromBody] MyModel item)
     {
@@ -46,6 +49,7 @@ public class ValuesController : Controller
         return NoContent();
     } 
 
+    [Authorize]
     [HttpDelete("{id}")]
     public IActionResult Delete(string id)
     {
