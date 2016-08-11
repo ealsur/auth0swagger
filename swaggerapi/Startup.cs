@@ -26,6 +26,7 @@ namespace swaggerapi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IRepository>(new Repository());
             services.AddMvc();
             /*Adding swagger generation with default settings*/
             services.AddSwaggerGen();
@@ -44,7 +45,6 @@ namespace swaggerapi
                 Authority = $"https://{Configuration["auth0:domain"]}/"
             };
             app.UseJwtBearerAuthentication(options);
-
             /*Normal MVC mappings*/
             app.UseMvc();
         }

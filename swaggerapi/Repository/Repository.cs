@@ -2,8 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+public interface IRepository{
+    IEnumerable<MyModel> GetAll();
+    MyModel Get(string id);
+    MyModel Add(MyModel newModel);
+    void Edit(string Id, MyModel newModel);
+    void Delete(string Id);
+}
+
 //Simple In-memory repository
-public class Repository
+public class Repository:IRepository
 {
     private List<MyModel> _entries;
     public Repository(){
@@ -13,8 +21,12 @@ public class Repository
         };
     }
 
-    public IEnumerable<MyModel> Get(){
+    public IEnumerable<MyModel> GetAll(){
         return _entries;
+    }
+
+    public MyModel Get(string id){
+        return _entries.First(x=>x.Id==id);
     }
 
     public MyModel Add(MyModel newModel){
