@@ -1,16 +1,13 @@
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.OAuth;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json.Linq;
 
 namespace swaggerweb
 {
@@ -29,91 +26,87 @@ namespace swaggerweb
         public IConfigurationRoot Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IConfiguration>(Configuration);
-
+            
             services.AddAuthentication(
                 options => options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
 
             services.AddMvc();
 
-            services.Configure<OAuthOptions>(options =>
-            {
-                options.AutomaticAuthenticate = false;
-                options.AutomaticChallenge = false;
+            services.AddOptions();
 
-                // We need to specify an Authentication Scheme
-                options.AuthenticationScheme = "Auth0";
+            services.Configure<Auth0Settings>(Configuration.GetSection("Auth0"));
 
-                // Configure the Auth0 Client ID and Client Secret
-                options.ClientId = Configuration["auth0:clientId"];
-                options.ClientSecret = Configuration["auth0:clientSecret"];
-
-                // Set the callback path, so Auth0 will call back to http://localhost:5000/signin-auth0 
-                // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard 
-                options.CallbackPath = new PathString("/signin-auth0");
-
-                // Configure the Auth0 endpoints                
-                options.AuthorizationEndpoint = $"https://{Configuration["auth0:domain"]}/authorize";
-                options.TokenEndpoint = $"https://{Configuration["auth0:domain"]}/oauth/token";
-                options.UserInformationEndpoint = $"https://{Configuration["auth0:domain"]}/userinfo";
-
-                options.Events = new OAuthEvents
-                {
-                    OnCreatingTicket = async context =>
-                    {
-                        // Retrieve user info
-                        var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
-                        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
-                        request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                        var response = await context.Backchannel.SendAsync(request, context.HttpContext.RequestAborted);
-                        response.EnsureSuccessStatusCode();
-
-                        // Extract the user info object
-                        var user = JObject.Parse(await response.Content.ReadAsStringAsync());
-
-                        // Add the Name Identifier claim
-                        var userId = user.Value<string>("user_id");
-                        if (!string.IsNullOrEmpty(userId))
-                        {
-                            context.Identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, userId,
-                                ClaimValueTypes.String, context.Options.ClaimsIssuer));
-                        }
-
-                        // Add the Name claim
-                        var email = user.Value<string>("email");
-                        if (!string.IsNullOrEmpty(email))
-                        {
-                            context.Identity.AddClaim(new Claim(ClaimsIdentity.DefaultNameClaimType, email,
-                                ClaimValueTypes.String, context.Options.ClaimsIssuer));
-                        }
-                    }
-                };
-            });
-        
+            
         }
 
-        
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        //Based on: https://github.com/auth0-samples/auth0-aspnetcore-sample/blob/master/04-Storing-Tokens/SampleMvcApp/Startup.cs
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptions<Auth0Settings> auth0Settings)
         {
             app.UseStaticFiles();
-            
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+
+            app.UseMvc();
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
-                LoginPath = new PathString("/Account/Login"),
-                LogoutPath = new PathString("/Account/Logout")
+                AutomaticChallenge = true
             });
-            var options = app.ApplicationServices.GetRequiredService<IOptions<OAuthOptions>>();
-            app.UseOAuthAuthentication(options.Value);
 
-            app.UseMvc();
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions("Auth0")
+            {
+                // Set the authority to your Auth0 domain
+                Authority = $"https://{auth0Settings.Value.Domain}",
+
+                // Configure the Auth0 Client ID and Client Secret
+                ClientId = auth0Settings.Value.ClientId,
+                ClientSecret = auth0Settings.Value.ClientSecret,
+
+                // Do not automatically authenticate and challenge
+                AutomaticAuthenticate = false,
+                AutomaticChallenge = false,
+
+                // Set response type to code
+                ResponseType = "code",
+
+                // Set the callback path, so Auth0 will call back to http://localhost:5000/signin-auth0 
+                // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard 
+                CallbackPath = new PathString("/signin-auth0"),
+
+                // Configure the Claims Issuer to be Auth0
+                ClaimsIssuer = "Auth0",
+
+                // Saves tokens to the AuthenticationProperties
+                SaveTokens = true,
+
+                Events = new OpenIdConnectEvents()
+                {
+                    OnTicketReceived = context =>
+                    {
+                        // Get the ClaimsIdentity
+                        var identity = context.Principal.Identity as ClaimsIdentity;
+                        if (identity != null)
+                        {
+                            // Check if token names are stored in Properties
+                            if (context.Properties.Items.ContainsKey(".TokenNames"))
+                            {
+                                // Token names a semicolon separated
+                                string[] tokenNames = context.Properties.Items[".TokenNames"].Split(';');
+
+                                // Add each token value as Claim
+                                foreach (var tokenName in tokenNames)
+                                {
+                                    // Tokens are stored in a Dictionary with the Key ".Token.<token name>"
+                                    string tokenValue = context.Properties.Items[$".Token.{tokenName}"];
+
+                                    identity.AddClaim(new Claim(tokenName, tokenValue));
+                                }
+                            }
+                        }
+
+                        return Task.FromResult(0);
+                    }
+                }
+            });
         }
     }
 }

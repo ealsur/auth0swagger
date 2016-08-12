@@ -11,12 +11,12 @@
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "autorest":"0.16.0",
     "Microsoft.Rest.ClientRuntime":"2.2.0",
-    "Microsoft.AspNetCore.Authentication.OAuth": "1.0.0",
+    "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
     "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
     "Microsoft.Extensions.Configuration.Json": "1.0.0",
-    "Microsoft.Extensions.Configuration.CommandLine": "1.0.0"
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0"
   },
 
   "tools": {
@@ -44,10 +44,14 @@
   },
 
   "publishOptions": {
+
     "include": [
       "wwwroot",
+      "Views",
+      "appsettings.json",
       "web.config"
     ]
+
   },
 
   "scripts": {
