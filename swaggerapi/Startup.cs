@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.Swagger.Model;
 
 namespace swaggerapi
 {
@@ -29,7 +30,14 @@ namespace swaggerapi
             services.AddSingleton<IRepository>(new Repository());
             services.AddMvc();
             /*Adding swagger generation with default settings*/
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(options => {
+                options.SingleApiVersion(new Info{
+                    Version="v1",
+                    Title="Auth0 Swagger Sample API",
+                    Description="API Sample made for Auth0",
+                    TermsOfService = "None"
+                });
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
