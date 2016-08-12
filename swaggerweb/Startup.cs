@@ -43,7 +43,7 @@ namespace swaggerweb
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptions<Auth0Settings> auth0Settings)
         {
             app.UseStaticFiles();
-            
+            app.UseDeveloperExceptionPage();
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AutomaticAuthenticate = true,

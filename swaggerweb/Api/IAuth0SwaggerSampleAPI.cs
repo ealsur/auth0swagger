@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace 
+namespace Services
 {
     using System;
     using System.Collections.Generic;
@@ -14,8 +14,9 @@ namespace
     using Models;
 
     /// <summary>
+    /// API Sample made for Auth0
     /// </summary>
-    public partial interface IAPIV1 : IDisposable
+    public partial interface IAuth0SwaggerSampleAPI : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace 
+namespace Services
 {
     using System;
     using System.Collections;
@@ -13,16 +13,16 @@ namespace
     using Models;
 
     /// <summary>
-    /// Extension methods for APIV1.
+    /// Extension methods for Auth0SwaggerSampleAPI.
     /// </summary>
-    public static partial class APIV1Extensions
+    public static partial class Auth0SwaggerSampleAPIExtensions
     {
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            public static IList<MyModel> ValuesGet(this IAPIV1 operations)
+            public static IList<MyModel> ValuesGet(this IAuth0SwaggerSampleAPI operations)
             {
-                return Task.Factory.StartNew(s => ((IAPIV1)s).ValuesGetAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IAuth0SwaggerSampleAPI)s).ValuesGetAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -31,7 +31,7 @@ namespace
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<MyModel>> ValuesGetAsync(this IAPIV1 operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<MyModel>> ValuesGetAsync(this IAuth0SwaggerSampleAPI operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ValuesGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -44,9 +44,9 @@ namespace
             /// </param>
             /// <param name='item'>
             /// </param>
-            public static MyModel ValuesPost(this IAPIV1 operations, MyModel item = default(MyModel))
+            public static MyModel ValuesPost(this IAuth0SwaggerSampleAPI operations, MyModel item = default(MyModel))
             {
-                return Task.Factory.StartNew(s => ((IAPIV1)s).ValuesPostAsync(item), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IAuth0SwaggerSampleAPI)s).ValuesPostAsync(item), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -57,7 +57,7 @@ namespace
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MyModel> ValuesPostAsync(this IAPIV1 operations, MyModel item = default(MyModel), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MyModel> ValuesPostAsync(this IAuth0SwaggerSampleAPI operations, MyModel item = default(MyModel), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ValuesPostWithHttpMessagesAsync(item, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -70,9 +70,9 @@ namespace
             /// </param>
             /// <param name='id'>
             /// </param>
-            public static MyModel ValuesByIdGet(this IAPIV1 operations, string id)
+            public static MyModel ValuesByIdGet(this IAuth0SwaggerSampleAPI operations, string id)
             {
-                return Task.Factory.StartNew(s => ((IAPIV1)s).ValuesByIdGetAsync(id), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IAuth0SwaggerSampleAPI)s).ValuesByIdGetAsync(id), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -83,7 +83,7 @@ namespace
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<MyModel> ValuesByIdGetAsync(this IAPIV1 operations, string id, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<MyModel> ValuesByIdGetAsync(this IAuth0SwaggerSampleAPI operations, string id, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ValuesByIdGetWithHttpMessagesAsync(id, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -98,9 +98,9 @@ namespace
             /// </param>
             /// <param name='item'>
             /// </param>
-            public static void ValuesByIdPut(this IAPIV1 operations, string id, MyModel item = default(MyModel))
+            public static void ValuesByIdPut(this IAuth0SwaggerSampleAPI operations, string id, MyModel item = default(MyModel))
             {
-                Task.Factory.StartNew(s => ((IAPIV1)s).ValuesByIdPutAsync(id, item), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IAuth0SwaggerSampleAPI)s).ValuesByIdPutAsync(id, item), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -113,7 +113,7 @@ namespace
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ValuesByIdPutAsync(this IAPIV1 operations, string id, MyModel item = default(MyModel), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ValuesByIdPutAsync(this IAuth0SwaggerSampleAPI operations, string id, MyModel item = default(MyModel), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ValuesByIdPutWithHttpMessagesAsync(id, item, null, cancellationToken).ConfigureAwait(false);
             }
@@ -123,9 +123,9 @@ namespace
             /// </param>
             /// <param name='id'>
             /// </param>
-            public static void ValuesByIdDelete(this IAPIV1 operations, string id)
+            public static void ValuesByIdDelete(this IAuth0SwaggerSampleAPI operations, string id)
             {
-                Task.Factory.StartNew(s => ((IAPIV1)s).ValuesByIdDeleteAsync(id), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IAuth0SwaggerSampleAPI)s).ValuesByIdDeleteAsync(id), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -136,7 +136,7 @@ namespace
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ValuesByIdDeleteAsync(this IAPIV1 operations, string id, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ValuesByIdDeleteAsync(this IAuth0SwaggerSampleAPI operations, string id, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ValuesByIdDeleteWithHttpMessagesAsync(id, null, cancellationToken).ConfigureAwait(false);
             }

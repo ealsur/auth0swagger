@@ -2,7 +2,7 @@
 // Changes may cause incorrect behavior and will be lost if the code is
 // regenerated.
 
-namespace 
+namespace Services
 {
     using System;
     using System.Linq;
@@ -20,7 +20,10 @@ namespace
     using Newtonsoft.Json;
     using Models;
 
-    public partial class APIV1 : ServiceClient<APIV1>, IAPIV1
+    /// <summary>
+    /// API Sample made for Auth0
+    /// </summary>
+    public partial class Auth0SwaggerSampleAPI : ServiceClient<Auth0SwaggerSampleAPI>, IAuth0SwaggerSampleAPI
     {
         /// <summary>
         /// The base URI of the service.
@@ -43,18 +46,18 @@ namespace
         public ServiceClientCredentials Credentials { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the APIV1 class.
+        /// Initializes a new instance of the Auth0SwaggerSampleAPI class.
         /// </summary>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected APIV1(params DelegatingHandler[] handlers) : base(handlers)
+        protected Auth0SwaggerSampleAPI(params DelegatingHandler[] handlers) : base(handlers)
         {
             this.Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the APIV1 class.
+        /// Initializes a new instance of the Auth0SwaggerSampleAPI class.
         /// </summary>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -62,13 +65,13 @@ namespace
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected APIV1(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+        protected Auth0SwaggerSampleAPI(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
         {
             this.Initialize();
         }
 
         /// <summary>
-        /// Initializes a new instance of the APIV1 class.
+        /// Initializes a new instance of the Auth0SwaggerSampleAPI class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -76,7 +79,7 @@ namespace
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected APIV1(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+        protected Auth0SwaggerSampleAPI(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -86,7 +89,7 @@ namespace
         }
 
         /// <summary>
-        /// Initializes a new instance of the APIV1 class.
+        /// Initializes a new instance of the Auth0SwaggerSampleAPI class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -97,7 +100,7 @@ namespace
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        protected APIV1(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        protected Auth0SwaggerSampleAPI(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {
@@ -107,7 +110,7 @@ namespace
         }
 
         /// <summary>
-        /// Initializes a new instance of the APIV1 class.
+        /// Initializes a new instance of the Auth0SwaggerSampleAPI class.
         /// </summary>
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify client subscription.
@@ -115,7 +118,7 @@ namespace
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public APIV1(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public Auth0SwaggerSampleAPI(ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (credentials == null)
             {
@@ -129,7 +132,7 @@ namespace
         }
 
         /// <summary>
-        /// Initializes a new instance of the APIV1 class.
+        /// Initializes a new instance of the Auth0SwaggerSampleAPI class.
         /// </summary>
         /// <param name='credentials'>
         /// Required. Subscription credentials which uniquely identify client subscription.
@@ -140,7 +143,7 @@ namespace
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public APIV1(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public Auth0SwaggerSampleAPI(ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (credentials == null)
             {
@@ -154,7 +157,7 @@ namespace
         }
 
         /// <summary>
-        /// Initializes a new instance of the APIV1 class.
+        /// Initializes a new instance of the Auth0SwaggerSampleAPI class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -165,7 +168,7 @@ namespace
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public APIV1(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
+        public Auth0SwaggerSampleAPI(Uri baseUri, ServiceClientCredentials credentials, params DelegatingHandler[] handlers) : this(handlers)
         {
             if (baseUri == null)
             {
@@ -184,7 +187,7 @@ namespace
         }
 
         /// <summary>
-        /// Initializes a new instance of the APIV1 class.
+        /// Initializes a new instance of the Auth0SwaggerSampleAPI class.
         /// </summary>
         /// <param name='baseUri'>
         /// Optional. The base URI of the service.
@@ -198,7 +201,7 @@ namespace
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
         /// </param>
-        public APIV1(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+        public Auth0SwaggerSampleAPI(Uri baseUri, ServiceClientCredentials credentials, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
         {
             if (baseUri == null)
             {

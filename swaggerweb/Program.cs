@@ -18,6 +18,7 @@ namespace swaggerweb
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseUrls("http://localhost:5001")/*This is so we can run the API and the web app simultaneously*/
                 .Build();
 
             host.Run();
