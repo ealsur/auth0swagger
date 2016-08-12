@@ -19,13 +19,4 @@ public class AccountController : Controller
 
         return RedirectToAction("Index", "Home");
     }
-
-    [Authorize]
-    public IActionResult Claims()
-
-    {
-
-        return View();
-
-    }
 }
