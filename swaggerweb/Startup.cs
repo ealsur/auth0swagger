@@ -43,15 +43,13 @@ namespace swaggerweb
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IOptions<Auth0Settings> auth0Settings)
         {
             app.UseStaticFiles();
-
-            app.UseMvc();
-
+            
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true
             });
-
+            //This should be BEFORE app.UseMvc to have priority on the pipeline
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions("Auth0")
             {
                 // Set the authority to your Auth0 domain
@@ -107,6 +105,8 @@ namespace swaggerweb
                     }
                 }
             });
+
+            app.UseMvcWithDefaultRoute();
         }
     }
 }
