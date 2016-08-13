@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SampleMvcApp</title>
+    <title>Auth0 Swagger Sample</title>
        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"/>
     </environment>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,11 +17,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="navbar-brand">SampleMvcApp</a>
+                <a href="/" class="navbar-brand">Auth0 Swagger Sample</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/">Home</a></li>
+                    <li><a href="/user/list">Users</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (User.Identity.IsAuthenticated)
@@ -40,7 +41,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2016 - SampleMvcApp</p>
+            <p>&copy; 2016 - <a href="https://www.twitter.com/ealsur" target="_blank">@@ealsur</a></p>
         </footer>
     </div>
 

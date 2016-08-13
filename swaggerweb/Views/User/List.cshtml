@@ -1,5 +1,24 @@
 @model List<Services.Models.MyModel>
 
-<div class="container">
-    @Model.Count
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Score</th>
+                <th>Roles</th>
+            </tr>
+            @foreach(var user in Model){
+                <tr>
+                    <td>@user.Name</td>
+                    <td>@user.Score</td>
+                    <td>@foreach(var role in user.Roles)
+                        {
+                            <span class="badge">@role</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 </div>
