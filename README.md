@@ -25,7 +25,7 @@ In the [Web App appsettings.json](./swaggerweb/appsettings.json), you need to fi
     {
      "Auth0": {
         "Domain": "{YOUR_AUTH0_DOMAIN}",
-        "ClientId": "{YOUR_AUTH0_CLIENTID}5YQtqSO6lJfVgGusKd7TnuO0gqfUfNdY",
+        "ClientId": "{YOUR_AUTH0_CLIENTID}",
         "ClientSecret": "{YOUR_AUTH0_CLIENTSECRET}",
         "CallbackUrl": "http://localhost:5000/signin-auth0"
       } 
