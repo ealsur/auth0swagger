@@ -2,7 +2,7 @@
 
 This repository consists of two Web applications, both using [Auth0](https://auth0.com) to identify users.
 
-The [Web API](./swaggerapi) is built on ASP.NET Core using [Swagger](http://swagger.io) to document its methods and models.
+The [Web API](./swaggerapi) is built on ASP.NET Core using [Swagger](http://swagger.io) to document its methods and models and provide an easier way to try it with a clear UI.
 
 ![Swagger UI](./images/swagger.png)
 
