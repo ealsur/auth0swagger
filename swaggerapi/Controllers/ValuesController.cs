@@ -11,6 +11,7 @@ public class ValuesController : Controller
         _repository = repository;
     }
 
+    [Authorize]
     [HttpGet("")]
     [Produces(typeof(IEnumerable<MyModel>))]
     [SwaggerResponse(System.Net.HttpStatusCode.OK, Type = typeof(IEnumerable<MyModel>))]
