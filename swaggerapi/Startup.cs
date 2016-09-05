@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.Swagger.Model;
+using System.IO;
 
 namespace swaggerapi
 {
@@ -37,6 +35,9 @@ namespace swaggerapi
                     Description="API Sample made for Auth0",
                     TermsOfService = "None"
                 });
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                var fullPath = Path.Combine(basePath, "swaggerapi.xml");
+                options.IncludeXmlComments(fullPath);
             });
         }
 
