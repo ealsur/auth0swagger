@@ -30,3 +30,6 @@ In the [Web App appsettings.json](./swaggerweb/appsettings.json), you need to fi
         "CallbackUrl": "http://localhost:5000/signin-auth0"
       } 
     }
+
+## Full Article
+The article describing this repository and step-by-step guide can be found at [Auth0's blog](https://auth0.com/blog/aspnet-core-apis-with-swagger-and-autorest/).
