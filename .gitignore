@@ -232,3 +232,7 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
+
+# application settings
+appsettings.Development.json
+appsettings.Production.json
