@@ -14,10 +14,7 @@ public class ValuesController : Controller
     /// <summary>
     /// Returns a collection of MyModel items
     /// </summary>
-    /// <param name="[Produces("application/json""></param>
-    /// <param name="[ProducesResponseType(typeof(IEnumerable<MyModel>)"></param>
-    /// <param name="GetAll("></param>
-    /// <returns></returns>
+    /// <returns>Returns a collection of MyModel items</returns>
     /// <response code="200">Returns a collection of MyModel items</response>
     [Authorize]
     [HttpGet("")]
@@ -32,8 +29,8 @@ public class ValuesController : Controller
     /// Returns a specific MyModel item 
     /// </summary>
     /// <param name="id"></param>
-    /// <returns></returns>
-    /// <response code="200">Returns specific MyModel item</response> <summary>
+    /// <returns>Returns specific MyModel item</returns>
+    /// <response code="200">Returns specific MyModel item</response>
     /// <response code="404">If the MyModel item is null</response>
     [HttpGet("{id}", Name = "GetModel")]
     [Produces(typeof(MyModel))]
@@ -47,7 +44,7 @@ public class ValuesController : Controller
     /// <summary>
     /// Creates a MyModel item
     /// </summary>
-    /// <param name="item"></param>
+    /// <param name="item">An item to create</param>
     /// <returns>new created MyModel item</returns>
     /// <response code="201">Returns the newly created item</response>
     /// <response code="400">If the item is null</response>
@@ -69,7 +66,8 @@ public class ValuesController : Controller
     /// <summary>
     /// Updates a specific MyModel item
     /// </summary>
-    /// <param name="id"></param>
+    /// <param name="id">The id of the instance</param>
+    /// <param name="item">An instance of MyModel</param>
     /// <returns></returns>
     /// <response code="204">Returns when item was updated</response>
     [Authorize]
@@ -85,7 +83,7 @@ public class ValuesController : Controller
     /// Updates a specific MyModel item
     /// </summary>
     /// <param name="id"></param>
-    /// <returns></returns> <summary>
+    /// <returns></returns>
     /// <response code="204">Returns when item was updated</response>
     [Authorize]
     [HttpDelete("{id}")]
