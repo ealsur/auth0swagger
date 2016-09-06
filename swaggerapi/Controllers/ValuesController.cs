@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.SwaggerGen.Annotations;
 
 [Route("values")]
+[Produces("application/json")]
 public class ValuesController : Controller
 {
     private readonly IRepository _repository;
@@ -11,27 +11,51 @@ public class ValuesController : Controller
         _repository = repository;
     }
 
+    /// <summary>
+    /// Returns a collection of MyModel items
+    /// </summary>
+    /// <param name="[Produces("application/json""></param>
+    /// <param name="[ProducesResponseType(typeof(IEnumerable<MyModel>)"></param>
+    /// <param name="GetAll("></param>
+    /// <returns></returns>
+    /// <response code="200">Returns a collection of MyModel items</response>
     [Authorize]
     [HttpGet("")]
-    [Produces(typeof(IEnumerable<MyModel>))]
-    [SwaggerResponse(System.Net.HttpStatusCode.OK, Type = typeof(IEnumerable<MyModel>))]
+    [Produces("application/json", Type = typeof(IEnumerable<MyModel>))]
+    [ProducesResponseType(typeof(IEnumerable<MyModel>), 200)]
     public IActionResult GetAll()
     {
         return new ObjectResult(_repository.GetAll());
     } 
 
+    /// <summary>
+    /// Returns a specific MyModel item 
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <response code="200">Returns specific MyModel item</response> <summary>
+    /// <response code="404">If the MyModel item is null</response>
     [HttpGet("{id}", Name = "GetModel")]
     [Produces(typeof(MyModel))]
-    [SwaggerResponse(System.Net.HttpStatusCode.OK, Type = typeof(MyModel))]
+    [ProducesResponseType(typeof(MyModel), 200)]
+    [ProducesResponseType(typeof(MyModel), 404)]
     public IActionResult  Get(string id)
     {
         return new ObjectResult(_repository.Get(id));
     } 
 
+    /// <summary>
+    /// Creates a MyModel item
+    /// </summary>
+    /// <param name="item"></param>
+    /// <returns>new created MyModel item</returns>
+    /// <response code="201">Returns the newly created item</response>
+    /// <response code="400">If the item is null</response>
     [Authorize]
     [HttpPost]
     [Produces(typeof(MyModel))]
-    [SwaggerResponse(System.Net.HttpStatusCode.OK, Type = typeof(MyModel))]
+    [ProducesResponseType(typeof(MyModel), 201)]
+    [ProducesResponseType(typeof(MyModel), 400)]
     public IActionResult Create([FromBody] MyModel item)
     {
         if (item == null)
@@ -42,16 +66,30 @@ public class ValuesController : Controller
         return CreatedAtRoute("GetModel", new { id = item.Id }, item);
     }
 
+    /// <summary>
+    /// Updates a specific MyModel item
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    /// <response code="204">Returns when item was updated</response>
     [Authorize]
-    [HttpPut("{id}")]    
+    [HttpPut("{id}")]
+    [ProducesResponseType(typeof(MyModel), 204)]
     public IActionResult Update(string id, [FromBody] MyModel item)
     {
         _repository.Edit(id, item);
         return NoContent();
     } 
 
+    /// <summary>
+    /// Updates a specific MyModel item
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns> <summary>
+    /// <response code="204">Returns when item was updated</response>
     [Authorize]
     [HttpDelete("{id}")]
+    [ProducesResponseType(typeof(MyModel), 204)]
     public IActionResult Delete(string id)
     {
         _repository.Delete(id);
