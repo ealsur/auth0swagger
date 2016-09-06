@@ -20,6 +20,8 @@ In the [Web API appsettings.json](./swaggerapi/appsettings.json), you need to fi
       }
     }
 
+> Note: You can use `appsettings.Development.json` and `appsettings.Production.json` to store your configuration data. Make sure to configure `.gitignore` to not include them in your repository though
+
 In the [Web App appsettings.json](./swaggerweb/appsettings.json), you need to fill some extra values plus the CallbackUrl, which should be equal to your Web App running domain.
 
     {
