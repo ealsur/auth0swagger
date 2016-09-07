@@ -12,5 +12,25 @@
             "isBuildCommand": true,
             "problemMatcher": "$msCompile"
         }
-    ]
+    ],
+     "linux": {
+        "tasks": [
+            {
+                "taskName": "build",
+                "args": [
+                    "${workspaceRoot}/project.json"
+                ]
+            }
+        ]
+    },
+    "osx": {
+        "tasks": [
+            {
+                "taskName": "build",
+                "args": [
+                    "${workspaceRoot}/project.json"
+                ]
+            }
+        ]
+    }
 }
