@@ -66,7 +66,7 @@ namespace swaggerweb
                 // Set response type to code
                 ResponseType = "code",
 
-                // Set the callback path, so Auth0 will call back to http://localhost:5000/signin-auth0 
+                // Set the callback path, so Auth0 will call back to http://localhost:5001/signin-auth0
                 // Also ensure that you have added the URL as an Allowed Callback URL in your Auth0 dashboard 
                 CallbackPath = new PathString("/signin-auth0"),
 
