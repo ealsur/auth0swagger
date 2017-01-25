@@ -50,7 +50,7 @@ namespace swaggerapi
             /*It's important that this is AFTER app.UseSwagger or the swagger.json file would be innaccesible*/
             var options = new JwtBearerOptions
             {
-                Audience = Configuration["auth0:clientId"],
+                Audience = Configuration["auth0:apiIdentifier"],
                 Authority = $"https://{Configuration["auth0:domain"]}/"
             };
             app.UseJwtBearerAuthentication(options);
